@@ -47,18 +47,22 @@ btnForme.addEventListener('click', (e) => {
  
 })
 
- function loadUsers() { fetch('https://66dac436f47a05d55be5e489.mockapi.io/Users').then(response => response.json().then(data => {
+ async function loadUsers() { 
+  
+  try {
+  const results = await fetch('https://66dac436f47a05d55be5e489.mockapi.io/Users')
+  const data = await results.json();
   data.forEach((user) => {
     if(user.id === inputValue) {
-      display.innerHTML += `<p><b>${user.name}</b></p>
-      <img src='${user.avatar}'/>`
-
-      
+      display.innerHTML += `
+      <p><b>${user.name}</b></p>
+      <img src="${user.avatar}">
+      `
     }
-  })
-})).catch(error => {
-  alert(error);
-})
+  })} catch(error) {
+console.log('Therer is some error', error)
+  }
+
  }
 
 
@@ -68,5 +72,9 @@ btnForme.addEventListener('click', (e) => {
 let response = request.then(response => response.json());
 console.log(response); //znaci ovo ovako nece raditi jer je ovo asinhrono
 */
+
+
+
+
 
 
